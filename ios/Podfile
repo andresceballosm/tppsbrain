@@ -1,0 +1,33 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'Tapps' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for Tapps
+
+  target 'TappsTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+target 'Tapps-tvOS' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for Tapps-tvOS
+
+    inherit! :search_paths
+    # Pods for testing
+
+
+end
+
+pod 'BraintreeDropIn', '~> 6.0'
+pod 'CardIO'
+pod 'Braintree/Apple-Pay'
+pod 'Braintree/PayPal'
+pod 'BraintreeDropIn/UIKit'
