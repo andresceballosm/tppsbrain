@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { StyleSheet, View} from 'react-native';
 import {StackAuthenticated} from './Components/Authenticated/StackAuthenticated';
+import { Privider } from 'react-redux';
 
 
 
