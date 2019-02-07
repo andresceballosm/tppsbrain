@@ -1,17 +1,20 @@
 import { DrawerNavigator, DrawerItems } from 'react-navigation';
-import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
-import { ClubProfile } from './ClubProfile';
+import { StackClubProfile } from './StackClubProfile';
 import { AdminPlayers } from './AdminPlayers';
+import Payments from '../PaymentsGeneric';
 import { CustomDraweComponent } from '../../Drawer';
 
 
 const AdminRoutes = DrawerNavigator({
     Profile: {
-      screen: ClubProfile,
+      screen: StackClubProfile,
+
     },
     Players: {
       screen: AdminPlayers,
+    },
+    Payments: {
+      screen: Payments,
     },
   },{
     initialRouteName: 'Profile',

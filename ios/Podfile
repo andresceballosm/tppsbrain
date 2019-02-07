@@ -6,10 +6,21 @@ target 'Tapps' do
   # use_frameworks!
 
   # Pods for Tapps
+  pod 'React', :path => '../node_modules/react-native', :subspecs => [
+    'Core',
+  #  'CxxBridge', # Include this for RN >= 0.47
+  #  'DevSupport', # Include this to enable In-App Devmenu if RN >= 0.43
+  #  'RCTText',
+  #  'RCTNetwork',
+  #  'RCTWebSocket', # Needed for debugging
+  #  'RCTAnimation', # Needed for FlatList and animations running on native UI thread
+    # Add any other subspecs you want to use in your project
+  ]
+  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
 
   pod 'RNI18n', :path => '../node_modules/react-native-i18n'
 
-  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   target 'TappsTests' do
     inherit! :search_paths
@@ -35,3 +46,6 @@ pod 'CardIO'
 pod 'Braintree/Apple-Pay'
 pod 'Braintree/PayPal'
 pod 'BraintreeDropIn/UIKit'
+pod 'Firebase/Core'
+pod 'Firebase/Auth', '~> 5.15.0'
+pod 'Firebase/Database', '~> 5.15.0'

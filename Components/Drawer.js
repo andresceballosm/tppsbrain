@@ -5,7 +5,7 @@ import { createStackNavigator,StackNavigator, DrawerNavigator, DrawerItems } fro
 export const CustomDraweComponent = (props) => (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.viewImage}>
-        <Image style={styles.image} source={require('../Assets/images/user-hp.png')}/>
+        <Image style={styles.image} source={require('../Assets/icons/tennis.png')}/>
       </View>
       <ScrollView>
         <DrawerItems {...props} />
