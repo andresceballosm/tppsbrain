@@ -7,6 +7,10 @@ target 'Tapps' do
 
   # Pods for Tapps
 
+  pod 'RNI18n', :path => '../node_modules/react-native-i18n'
+
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
   target 'TappsTests' do
     inherit! :search_paths
     # Pods for testing

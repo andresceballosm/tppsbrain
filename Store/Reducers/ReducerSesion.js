@@ -1,10 +1,10 @@
-import CONSTANTS from '../CONSTANTS.JS';
+import CONSTANTS from '../CONSTANTS.js';
 
 export default ReducerSesion = (state=null, action) => {
-    switch (action.key) {
-        case CONSTANTS.ESTABLECER_SESION:
-            return action.usuario
-        case CONSTANTS.CERRAR_SESION : 
+    switch (action.type) {
+        case CONSTANTS.SET_SESION:
+            return action.usuario;
+        case CONSTANTS.LOGOUT : 
             return null;   
         default:
             return state;

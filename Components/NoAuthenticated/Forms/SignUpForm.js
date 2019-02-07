@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
-import { autenticacion } from '../../../Store/Servicios/Firebase';
+import { traslateText } from '../../../Config/Language/Utils';
 
-const fieldNombre = (props) => {
+const fieldName = (props) => {
   console.log('inputs');
   return (
     <View style={styles.texInput}>
@@ -11,9 +11,9 @@ const fieldNombre = (props) => {
         placeholder={props.ph}
         onChangeText={props.input.onChange}
         value={props.input.value}
-        keyboardType={props.input.name === 'correo' ? 'email-address' : 'default'}
+        keyboardType={props.input.name === 'email' ? 'email-address' : 'default'}
         autoCapitalize="none"
-        secureTextEntry={!!(props.input.name === 'password' || props.input.name === 'confirmacion')}
+        secureTextEntry={!!(props.input.name === 'password' || props.input.name === 'confirmation')}
         onBlur={props.input.onBlur}
       />
       <View style={styles.linea} />
@@ -25,32 +25,32 @@ const fieldNombre = (props) => {
 
 const validate = (values) => {
   const errors = {};
-  if (!values.nombre) {
-    errors.nombre = 'requerido';
-  } else if (values.nombre.length < 5) {
-    errors.nombre = 'deben ser al menos 5 caracteres';
-  } else if (values.nombre.length > 10) {
-    errors.nombre = 'debe ser menor de 10 caracteres';
+  if (!values.name) {
+    errors.name = traslateText('required');
+  } else if (values.name.length < 5) {
+    errors.name = 'deben ser al menos 5 caracteres';
+  } else if (values.name.length > 10) {
+    errors.name = 'debe ser menor de 10 caracteres';
   }
 
-  if (!values.correo) {
-    errors.correo = 'requerido';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.correo)) {
-    errors.correo = 'correo invalido';
+  if (!values.email) {
+    errors.email = traslateText('required');
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'email invalido';
   }
 
   if (!values.password) {
-    errors.password = 'requerido';
-  } else if (values.password.length < 5) {
-    errors.password = 'deben ser al menos 5 caracteres';
+    errors.password = traslateText('required');
+  } else if (values.password.length < 6) {
+    errors.password = traslateText('errorMin6');
   } else if (values.password.length > 15) {
-    errors.password = 'debe ser menor de 15 caracteres';
+    errors.password = traslateText('errorMax15');
   }
 
-  if (!values.confirmacion) {
-    errors.confirmacion = 'requerido';
-  } else if (values.password !== values.confirmacion) {
-    errors.confirmacion = 'el password debe coincidir';
+  if (!values.confirmation) {
+    errors.confirmation = traslateText('required');
+  } else if (values.password !== values.confirmation) {
+    errors.confirmation = 'La contraseña debe coincidir';
   }
 
   return errors;
@@ -60,30 +60,13 @@ const SignUpForm = (props) => {
   console.log('signupform');
   return (
     <View>
-      <Field name="nombre" component={fieldNombre} ph="nombre" />
-      <Field name="correo" component={fieldNombre} ph="correo@correo.com" />
-      <Field name="password" component={fieldNombre} ph="******" />
-      <Field name="confirmacion" component={fieldNombre} ph="******" />
+      <Field name="name" component={fieldName} ph={traslateText('name')} />
+      <Field name="email" component={fieldName} ph="email@email.com" />
+      <Field name="password" component={fieldName} ph="******" />
+      <Field name="confirmation" component={fieldName} ph="******" />
       <Button
-        title="Registrar"
-        onPress={props.handleSubmit(props.registro,
-          //   (values) => {
-          //   console.log(values);
-          //   autenticacion
-          //     .createUserWithEmailAndPassword(values.correo, values.password)
-          //     .then((success) => {
-          //       console.log(success);
-          //     })
-          //     .catch((error) => {
-          //       // Handle Errors here.
-          //       const errorCode = error.code;
-          //       const errorMessage = error.message;
-          //       console.log(errorCode);
-          //       console.log(errorMessage);
-          //       // ...
-          //     });
-          // }
-        )}
+        title={traslateText('Btn_register')}
+        onPress={props.handleSubmit(props.register)}
       />
     </View>
   );
@@ -94,7 +77,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   linea: {
-    backgroundColor: '#DCDCDC',
+    //backgroundColor: '#DCDCDC',
     height: 2,
   },
   errors: {

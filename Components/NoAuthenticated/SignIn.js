@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
-import SignInForm from './Formas/SignInForm';
+import { connect } from 'react-redux';
+import SignInForm from './Forms/SignInForm';
+import {traslateText} from '../../Config/Language/Utils';
+import { ActionLogin } from '../../Store/Actions/ActionLogin';
 
 // create a component
 class SignIn extends Component {
+  userLogin= (values) => {
+    this.props.login(values);
+  }
   render() {
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
-        <SignInForm />
+        <SignInForm login={this.userLogin} />
         <Button
-          title="SignUp"
+          title={traslateText('Btn_signUp')}
           onPress={() => {
             navigation.navigate('SignUp');
           }}
@@ -25,10 +31,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#90EE90',
+    //backgroundColor: '#ffffff',
     paddingHorizontal: 16,
   },
 });
 
 // make this component available to the app
-export default SignIn;
+
+const mapStateToProps = state => ({
+  prop: state.prop,
+});
+
+const mapDispatchToProps = dispatch => ({
+  login: (data) => {
+    dispatch(ActionLogin(data));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+

@@ -3,6 +3,7 @@ const CONSTANTS = {
     LOGIN: 'LOGIN',
     SET_SESION: 'SET_SESION',
     LOGOUT : 'LOGOUT ',
+    GET_LANGUAGE:'GET_LANGUAGE',
 };
 
 export default CONSTANTS;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
 import BraintreeDropIn from 'react-native-braintree-payments-drop-in';
 import * as brainTreeUtils from "../../Utils/BraintreeUtils";
-
+import { authentication } from '../../Store/Services/Firebase';
 
 
 class PaymentsGeneric extends Component {
@@ -86,6 +86,12 @@ class PaymentsGeneric extends Component {
             onPress={() => {this.braintreePayment(this.state.nonce, this.state.amount)}} 
             /> 
             <Text>{this.state.amount}</Text>
+            <Button
+            title="Salir"
+            onPress={() => {
+                authentication.signOut();
+            }}
+            />
         </View>
         );
     }

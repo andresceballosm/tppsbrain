@@ -2,7 +2,7 @@ import { StackNavigator } from 'react-navigation';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 
-const RutasNoAutenticadas = StackNavigator(
+const StackNoAuthenticated = StackNavigator(
   {
     SignIn: {
       screen: SignIn,
@@ -16,4 +16,4 @@ const RutasNoAutenticadas = StackNavigator(
   },
 );
 
-export { RutasNoAutenticadas };
+export { StackNoAuthenticated };
