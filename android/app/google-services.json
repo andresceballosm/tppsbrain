@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "400683359433",
-    "firebase_url": "https://clone-instagram-cd240.firebaseio.com",
-    "project_id": "clone-instagram-cd240",
-    "storage_bucket": "clone-instagram-cd240.appspot.com"
+    "project_number": "345041518924",
+    "firebase_url": "https://tapps-31e17.firebaseio.com",
+    "project_id": "tapps-31e17",
+    "storage_bucket": "tapps-31e17.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:400683359433:android:9d966f8fc5906f16",
+        "mobilesdk_app_id": "1:345041518924:android:5b2d9460886e81e6",
         "android_client_info": {
-          "package_name": "com.tapps"
+          "package_name": "com.terracomsortium.tapps"
         }
       },
       "oauth_client": [
         {
-          "client_id": "400683359433-gr51qkv7hbmh7l02ulupi41trk036vq6.apps.googleusercontent.com",
+          "client_id": "345041518924-k5e3pkvrepc451n3c3cp59aqf4bd65nn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBan5Hcuj4TEbSatp4Crmy3PjfdiF0UNSI"
+          "current_key": "AIzaSyBPVMaQQ3VD70xnXw8V_NkwtBTvKVjsMII"
         }
       ],
       "services": {

@@ -9,7 +9,7 @@ import { ActionSetSesion } from '../Store/Actions/ActionSetSesion';
 import { ActionLogout } from '../Store/Actions/ActionLogout';
 import { ActionGetLanguage } from '../Store/Actions/ActionGetLanguage';
 import { getCurrentLocale } from '../Config/Language/getCurrentLocale';
-import { AdminRoutes } from './Authenticated/Admin/AdminRoutes';
+import { AdminRoutes } from './Authenticated/Admin/Routes/AdminRoutes';
 
 // create a component
 class Selection extends Component {

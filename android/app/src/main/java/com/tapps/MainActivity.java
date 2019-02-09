@@ -1,4 +1,4 @@
-package com.tapps;
+package com.terracomsortium.tapps;
 
 import com.facebook.react.ReactActivity;
 

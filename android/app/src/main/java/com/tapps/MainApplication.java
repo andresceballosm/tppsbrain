@@ -1,4 +1,4 @@
-package com.tapps;
+package com.terracomsortium.tapps;
 
 import android.app.Application;
 
@@ -7,8 +7,10 @@ import com.oblador.vectoricons.VectorIconsPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.auth.RNFirebaseAuthPackage;
 import io.invertase.firebase.database.RNFirebaseDatabasePackage;
+import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import tech.bam.RNBraintreeDropIn.RNBraintreeDropInPackage;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -33,8 +35,10 @@ public class MainApplication extends Application implements ReactApplication {
             new RNFirebasePackage(),
             new RNFirebaseAuthPackage(),
             new RNFirebaseDatabasePackage(),
+            new RNFirebaseFirestorePackage(),
             new RNI18nPackage(),
-            new RNBraintreeDropInPackage()
+            new RNBraintreeDropInPackage(),
+            new PickerPackage()
       );
     }
 

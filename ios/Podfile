@@ -8,6 +8,7 @@ target 'Tapps' do
   # Pods for Tapps
   pod 'React', :path => '../node_modules/react-native', :subspecs => [
     'Core',
+    'RCTImage'
   #  'CxxBridge', # Include this for RN >= 0.47
   #  'DevSupport', # Include this to enable In-App Devmenu if RN >= 0.43
   #  'RCTText',
@@ -21,6 +22,10 @@ target 'Tapps' do
   pod 'RNI18n', :path => '../node_modules/react-native-i18n'
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+
+
+  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
 
   target 'TappsTests' do
     inherit! :search_paths
@@ -49,3 +54,4 @@ pod 'BraintreeDropIn/UIKit'
 pod 'Firebase/Core'
 pod 'Firebase/Auth', '~> 5.15.0'
 pod 'Firebase/Database', '~> 5.15.0'
+pod 'Firebase/Firestore', '~> 5.15.0'

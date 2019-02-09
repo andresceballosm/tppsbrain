@@ -5,10 +5,10 @@ import CONSTANTS from '../CONSTANTS';
 const registerInFirebase = values =>
   authentication
     .createUserWithEmailAndPassword(values.email, values.password)
-    .then(success => success.toJSON());
+    .then(success => success);
 
 const registerInDataBase = ({ uid, email, name }) =>
-  dataBase.ref(`usuarios/${uid}`).set({
+  dataBase.collection('users').doc(`${uid}`).set({
     name,
     email,
   });
@@ -16,8 +16,11 @@ const registerInDataBase = ({ uid, email, name }) =>
 function* sagaRegister(values) {
   try {
     const register = yield call(registerInFirebase, values.data);
-    const { email, uid } = register;
+    const { email, uid } = register.user._user;
+    console.log('llega este email', email);
+    console.log('llega este uid', uid);
     const { data: { name } } = values;
+    console.log('data:name', name)
     yield call(registerInDataBase, { uid, email, name });
   } catch (error) {
     console.log(error);

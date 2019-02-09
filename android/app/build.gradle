@@ -99,11 +99,13 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.tapps"
+        applicationId "com.terracomsortium.tapps"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
     }
     splits {
         abi {
@@ -135,11 +137,13 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-image-crop-picker')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-firebase')
     implementation 'com.google.firebase:firebase-core:16.0.6'
     implementation "com.google.firebase:firebase-database:16.0.5"
     implementation "com.google.firebase:firebase-auth:16.1.0"
+    implementation "com.google.firebase:firebase-firestore:17.1.5"
     implementation project(':react-native-i18n')
     implementation project(':react-native-braintree-payments-drop-in')
     implementation fileTree(dir: "libs", include: ["*.jar"])
