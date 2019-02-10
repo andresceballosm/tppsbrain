@@ -1,68 +1,48 @@
 import React, { Component } from 'react'
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { authentication } from '../../../Store/Services/Firebase';
-import  ImagePicker  from  'react-native-image-crop-picker' ;
+import { ActionLoadImage,ActionCleanImage } from '../../../Store/Actions/ActionApp'
+import SelectImage from '../../Utils/SelectImage';
 
 export class ClubProfile extends Component {
-    selectImage = () => {
-        ImagePicker.openPicker({
-            width: 300,
-            height: 400,
-            cropping: true
-          }).then(image => {
-            console.log(image);
-          });
-    } 
-    openCamera = () => {
-        ImagePicker.openCamera({
-            width: 300,
-            height: 400,
-            cropping: true,
-        }).then(image => {
-        console.log(image);
-        });
+    componentWillMount(){
+        this.props.cleanImage();
     }
     render() {
         return (
-        <View>
+        <View style={styles.container}>
             <Text> Profile Club </Text>
-            <Button
-            title="Subir imagen"
-            onPress={() => { this.selectImage()}}
-            />
-            <Button
-            title="Tomar foto"
-            onPress={() => { this.openCamera()}}
-            />
+            <SelectImage image={this.props.image.image} load={this.props.loadImage} />
             <Button
             title="Salir"
             onPress={() => {
                 authentication.signOut();
             }}
             />
-
         </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    icon: {
-      width: 42,
-      height: 42,
+    container: {
+        alignItems: 'center',
     },
-    menu: {
-        marginLeft: 10
-    }
 });
 
-const mapStateToProps = (state) => ({
-  
+const mapStateToProps = state => ({
+    image: state.ReducerImage,
 })
 
-const mapDispatchToProps = {
-  
-}
+
+const mapDispatchToProps = dispatch => ({
+    loadImage: (image) => {
+        dispatch(ActionLoadImage(image))
+    },
+    cleanImage:() => {
+        dispatch(ActionCleanImage())
+    }
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClubProfile)

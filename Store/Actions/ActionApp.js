@@ -21,4 +21,20 @@ export const ActionOpenAlertError = error => ({
     error,
 });
 
+export const ActionLoadImage = image => {
+    console.log('image en actionLoadImage',image)
+    return {
+        type: CONSTANTS.LOAD_IMAGE_LOGOCLUB,
+        image,
+    }
+};
+
+export const ActionCleanImage = image => {
+    console.log('image en actionCleanImage',image)
+    return {
+        type: CONSTANTS.CLEAN_IMAGE_LOGOCLUB,
+        image,
+    }
+};
+
 
