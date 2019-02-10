@@ -44,7 +44,6 @@ const validate = (values) => {
 };
 
 const SignInForm = (props) => {
-  console.log(props);
   return (
     <View>
       <Field name="email" component={fieldNombre} ph="email@email.com" />

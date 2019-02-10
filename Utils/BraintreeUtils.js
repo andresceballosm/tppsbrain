@@ -9,7 +9,6 @@ export const getClientToken = () => {
       method: "GET"
     }).then(res => {
       let json = res;
-      console.log('json en braintreeUtils.js',json);
       return json;
     });
 };

@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { authentication } from '../Store/Services/Firebase';
-import { StackAuthenticated } from './Authenticated/StackAuthenticated';
 import { StackNoAuthenticated } from './NoAuthenticated/StackNoAuthenticated';
 import { ActionSetSesion } from '../Store/Actions/ActionSetSesion';
 import { ActionLogout } from '../Store/Actions/ActionLogout';
@@ -40,7 +39,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getLanguages: () => {
     const language = getCurrentLocale();
-      console.log('esto es language en selection',language);
       dispatch(ActionGetLanguage(language));
   },
   authentication: () => {
@@ -49,7 +47,6 @@ const mapDispatchToProps = dispatch => ({
       if (usuario) {
         dispatch(ActionSetSesion(usuario));
       } else {
-        console.log('No existe sesión');
         dispatch(ActionLogout());
       }
     });

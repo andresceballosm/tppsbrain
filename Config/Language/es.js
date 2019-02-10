@@ -11,4 +11,17 @@ export default {
     Btn_register:'Registrar',
     Btn_loginSingUp : 'Inicio de sesión',
     name: 'Nombre',
+    clubname: 'Nombre del Club / ORG',
+    selectClub:'Club / ORG',
+    selectPlayer:'Jugador',
+    areyou:'¿Eres tú?',
+    administrator: 'Administrador',
+    mainAddress:'Dirección principal',
+    phone: 'Teléfono',
+    website: 'Página web',
+    password:'Contraseña',
+    confirmationpassword:'Confirmar contraseña',
+    errorConfirmationPassword: 'Contraseña invalida',
+    errorEmailInUse:'La dirección de correo electrónico que ingresó ya está registrada.'
+
 }

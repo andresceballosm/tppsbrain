@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, TextInput,  } from 'react-native';
+import { Button } from 'react-native-elements';
 import { Field, reduxForm } from 'redux-form';
 import { traslateText } from '../../../Config/Language/Utils';
 
 const fieldName = (props) => {
-  console.log('inputs');
   return (
     <View style={styles.texInput}>
       <TextInput
@@ -15,6 +15,7 @@ const fieldName = (props) => {
         autoCapitalize="none"
         secureTextEntry={!!(props.input.name === 'password' || props.input.name === 'confirmation')}
         onBlur={props.input.onBlur}
+        borderBottomWidth={0.2}
       />
       <View style={styles.linea} />
       {props.meta.touched &&
@@ -25,13 +26,21 @@ const fieldName = (props) => {
 
 const validate = (values) => {
   const errors = {};
-  if (!values.name) {
-    errors.name = traslateText('required');
-  } else if (values.name.length < 5) {
-    errors.name = 'deben ser al menos 5 caracteres';
-  } else if (values.name.length > 10) {
-    errors.name = 'debe ser menor de 10 caracteres';
+  if (!values.clubname) {
+    errors.clubname = traslateText('required');
   }
+  /*
+  if (!values.administrator) {
+    errors.administrator = traslateText('required');
+  }
+
+  if (!values.mainAddress) {
+    errors.mainAddress = traslateText('required');
+  }
+
+  if (!values.phone) {
+    errors.phone = traslateText('required');
+  }*/
 
   if (!values.email) {
     errors.email = traslateText('required');
@@ -50,22 +59,27 @@ const validate = (values) => {
   if (!values.confirmation) {
     errors.confirmation = traslateText('required');
   } else if (values.password !== values.confirmation) {
-    errors.confirmation = 'La contraseña debe coincidir';
+    errors.confirmation = traslateText('errorConfirmationPassword');
   }
 
   return errors;
 };
 
-const SignUpForm = (props) => {
-  console.log('signupform');
+const SignUpFormAdmin = (props) => {
+  console.log('SignUpFormAdmin');
   return (
     <View>
-      <Field name="name" component={fieldName} ph={traslateText('name')} />
+      <Field name="clubname" component={fieldName} ph={traslateText('clubname')} />
+      <Field name="administrator" component={fieldName} ph={traslateText('administrator')} />
+      <Field name="mainAddress" component={fieldName} ph={traslateText('mainAddress')} />
+      <Field name="phone" component={fieldName} ph={traslateText('phone')} />
+      <Field name="website" component={fieldName} ph={traslateText('website')} />
       <Field name="email" component={fieldName} ph="email@email.com" />
-      <Field name="password" component={fieldName} ph="******" />
-      <Field name="confirmation" component={fieldName} ph="******" />
+      <Field name="password" component={fieldName} ph={traslateText('password')} />
+      <Field name="confirmation" component={fieldName} ph={traslateText('confirmationpassword')} />
       <Button
         title={traslateText('Btn_register')}
+        type="clear"
         onPress={props.handleSubmit(props.register)}
       />
     </View>
@@ -86,6 +100,6 @@ const styles = StyleSheet.create({
 });
 
 export default reduxForm({
-  form: 'SignUpForm',
+  form: 'SignUpFormAdmin',
   validate,
-})(SignUpForm);
+})(SignUpFormAdmin);
