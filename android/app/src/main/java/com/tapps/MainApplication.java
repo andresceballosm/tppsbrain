@@ -8,6 +8,7 @@ import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.auth.RNFirebaseAuthPackage;
 import io.invertase.firebase.database.RNFirebaseDatabasePackage;
 import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
+import io.invertase.firebase.storage.RNFirebaseStoragePackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import tech.bam.RNBraintreeDropIn.RNBraintreeDropInPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
@@ -36,6 +37,7 @@ public class MainApplication extends Application implements ReactApplication {
             new RNFirebaseAuthPackage(),
             new RNFirebaseDatabasePackage(),
             new RNFirebaseFirestorePackage(),
+            new RNFirebaseStoragePackage(),
             new RNI18nPackage(),
             new RNBraintreeDropInPackage(),
             new PickerPackage()

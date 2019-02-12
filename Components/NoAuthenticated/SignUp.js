@@ -8,6 +8,7 @@ import SignUpFormAdmin from './Forms/SignUpFormAdmin';
 import {traslateText} from '../../Config/Language/Utils';
 import { ActionSetLoading } from '../../Store/Actions/ActionApp';
 import AlertError from '../Utils/AlertError';
+import { Loading } from '../Utils/Loading';
 
 class SignUp extends Component {
   constructor () {
@@ -37,7 +38,8 @@ class SignUp extends Component {
 
     const LoadingStatus = () => {
       if (loading == 'true')
-         return <ActivityIndicator size="large" color="#0000ff" />;
+        return 
+          <Loading />
       return null;
     }
 
@@ -116,7 +118,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingVertical: 20,
     flex: Platform.OS === 'ios' ? 1 : 0,
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

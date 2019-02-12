@@ -29,7 +29,7 @@ const validate = (values) => {
   if (!values.clubname) {
     errors.clubname = traslateText('required');
   }
-  /*
+  
   if (!values.administrator) {
     errors.administrator = traslateText('required');
   }
@@ -40,7 +40,7 @@ const validate = (values) => {
 
   if (!values.phone) {
     errors.phone = traslateText('required');
-  }*/
+  }
 
   if (!values.email) {
     errors.email = traslateText('required');

@@ -7,8 +7,9 @@ import { StackNoAuthenticated } from './NoAuthenticated/StackNoAuthenticated';
 import { ActionSetSesion } from '../Store/Actions/ActionSetSesion';
 import { ActionLogout } from '../Store/Actions/ActionLogout';
 import { ActionGetLanguage } from '../Store/Actions/ActionGetLanguage';
+import { ActionGetDataClub } from '../Store/Actions/ActionGetDataClub';
 import { getCurrentLocale } from '../Config/Language/getCurrentLocale';
-import { AdminRoutes } from './Authenticated/Admin/Routes/AdminRoutes';
+import TypeUser from './TypeUser';
 
 // create a component
 class Selection extends Component {
@@ -19,7 +20,7 @@ class Selection extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.props.user ? <AdminRoutes /> : <StackNoAuthenticated />}
+        {this.props.user ? <TypeUser /> : <StackNoAuthenticated />}
       </View>
     );
   }
@@ -42,9 +43,9 @@ const mapDispatchToProps = dispatch => ({
       dispatch(ActionGetLanguage(language));
   },
   authentication: () => {
-    // dispatch(actionCreator)
     authentication.onAuthStateChanged((usuario) => {
       if (usuario) {
+        console.log(usuario._user.uid);
         dispatch(ActionSetSesion(usuario));
       } else {
         dispatch(ActionLogout());

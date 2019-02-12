@@ -27,6 +27,7 @@ target 'Tapps' do
 
   pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
 
+
   target 'TappsTests' do
     inherit! :search_paths
     # Pods for testing
@@ -55,3 +56,4 @@ pod 'Firebase/Core'
 pod 'Firebase/Auth', '~> 5.15.0'
 pod 'Firebase/Database', '~> 5.15.0'
 pod 'Firebase/Firestore', '~> 5.15.0'
+pod 'Firebase/Storage', '~> 5.15.0'

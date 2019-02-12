@@ -4,13 +4,14 @@ import  ImagePicker  from  'react-native-image-crop-picker' ;
 import { Button } from 'react-native-elements';
 
 const SelectImage = (props) => {
+  console.log('propsSelectNewImage', props.urlImage);
   const selectImage = async () => {
     const result = await ImagePicker.openPicker({
         width: 300,
         height: 400,
         cropping: true
       }).then(image => {
-        props.load(image)
+        props.load(image,props.uid)
       });
   } 
   const openCamera = () => {
@@ -28,7 +29,8 @@ const SelectImage = (props) => {
             style={styles.image} 
           />
         ):(
-            <Image source={require('../../Assets/icons/club-org-seal.png')} 
+          //trae la imagen guardada
+            <Image source={{ uri: props.urlImage }} 
             style={styles.image} 
             />
         )}

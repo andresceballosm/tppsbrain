@@ -8,7 +8,15 @@ const registerInFirebase = values =>
     .createUserWithEmailAndPassword(values.email, values.password)
     .then(success => success);
 
-const registerClubInDataBase = ({ uid, email, clubname, administrator, mainAddress, phone, website }) => 
+const registerUserInDataBase = ({ uid, email, clubname, administrator, mainAddress, phone, website }) => 
+  dataBase.collection('users').doc(`${uid}`).set({
+    clubname,
+    email,
+    administrator,
+    type:'admin', 
+  })
+
+  const registerClubInDataBase = ({ uid, email, clubname, administrator, mainAddress, phone, website }) => 
   dataBase.collection('clubs').doc(`${uid}`).set({
     clubname,
     email,
@@ -24,6 +32,7 @@ function* sagaRegister(values) {
       const register = yield call(registerInFirebase, values.data);
       const { email, uid } = register.user._user;
       const { data: { clubname, administrator, mainAddress, phone, website } } = values;
+      yield call(registerUserInDataBase, { uid, email, clubname, administrator });
       yield call(registerClubInDataBase, { uid, email, clubname, administrator, mainAddress, phone, website });
       yield put(ActionStopLoading());
     } catch (error) {

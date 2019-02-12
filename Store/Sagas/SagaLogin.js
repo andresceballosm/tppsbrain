@@ -5,7 +5,7 @@ import { ActionSetLoading } from '../Actions/ActionSetSesion';
 
 const sagaRegisterClub = require('./SagaRegisterClub');
 const loginInFirebase = ({ email, password }) =>
-authentication.signInWithEmailAndPassword(email, password).then(success => success.toJSON());
+authentication.signInWithEmailAndPassword(email, password).then(success => success);
 
 function* Login(values) {
   try {
