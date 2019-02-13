@@ -1,26 +1,54 @@
 import React from 'react';
-import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Image, TouchableOpacity, StyleSheet,Platform } from 'react-native';
 import  ImagePicker  from  'react-native-image-crop-picker' ;
 import { Button } from 'react-native-elements';
 import SelectNewImage from './SelectNewImage';
 
 const SelectImageSaved = (props) => {
-  console.log('propsSelectImage', props);
-  
+    const platformImage = () => {
+        var imagePath = '';
+        if(Platform.OS === 'ios'){
+          imagePath = props.image.sourceURL
+        }else{
+          imagePath =  props.image.path;
+        }
+        return imagePath;
+    };
+    const selectImage = async () => {
+        try {
+        await ImagePicker.openPicker({
+            width: 300,
+            height: 400,
+            cropping: false
+        }).then(image => {
+            props.load(image,props.uid)
+        });
+        } catch (e) {
+        console.log(e);
+        }
+    }   
   return (
     <View>
         { props.urlImage ? (
             <SelectNewImage 
-            //image={props.image.image}
-            load={props.loadImage} 
+            image={props.image}
+            load={props.load} 
             urlImage={props.urlImage}
             dataClub={props.dataClub} 
-            uid={props.clubUid}
+            uid={props.uid}
             />
         ):(
-            <Image source={require('../../Assets/icons/club-org-seal.png')} 
-            style={styles.image} 
-            />
+            <TouchableOpacity onPress={() => { selectImage()}}>
+            { props.image ? (
+                <Image source={{ uri: platformImage() }} 
+                style={styles.image} 
+             />
+             ):(
+                <Image source={require('../../Assets/icons/club-org-seal.png')} 
+                    style={styles.image} 
+                />
+             )}      
+            </TouchableOpacity>
         )}
     </View>
   );

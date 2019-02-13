@@ -1,19 +1,33 @@
 import React from 'react';
-import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import  ImagePicker  from  'react-native-image-crop-picker' ;
+import { View, Image, TouchableOpacity, StyleSheet, Platform } from 'react-native';
+import  ImagePicker from 'react-native-image-crop-picker' ;
 import { Button } from 'react-native-elements';
 
-const SelectImage = (props) => {
-  console.log('propsSelectNewImage', props.urlImage);
+const SelectNewImage = (props) => {
+  console.log('propsSelectNewImage', props);
+  const platformImage = () => {
+    var imagePath = '';
+    if(Platform.OS === 'ios'){
+      imagePath = props.image.sourceURL
+    }else{
+      imagePath =  props.image.path;
+    }
+    return imagePath;
+  };
+
   const selectImage = async () => {
-    const result = await ImagePicker.openPicker({
+    try {
+      await ImagePicker.openPicker({
         width: 300,
         height: 400,
-        cropping: true
+        cropping: false
       }).then(image => {
         props.load(image,props.uid)
       });
-  } 
+    } catch (e) {
+      console.log(e);
+    }
+  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
   const openCamera = () => {
       const result = ImagePicker.openCamera({
           width: 300,
@@ -25,26 +39,15 @@ const SelectImage = (props) => {
     <View>
       <TouchableOpacity onPress={() => { selectImage()}}>
         { props.image ? (
-            <Image source={{ uri: props.image.sourceURL }} 
+            <Image source={{ uri: platformImage() }} 
             style={styles.image} 
           />
         ):(
-          //trae la imagen guardada
             <Image source={{ uri: props.urlImage }} 
             style={styles.image} 
             />
         )}
       </TouchableOpacity>
-      <Button
-      title="Subir imagen"
-      type="clear"
-      onPress={() => { this.selectImage()}}
-      />
-      <Button
-      title="Tomar foto"
-      onPress={() => { this.openCamera()}}
-      type="clear"
-      />
     </View>
   );
 }
@@ -54,5 +57,5 @@ const styles = StyleSheet.create({
       width: 250, height: 250,
   }
 });
-export default SelectImage;
+export default SelectNewImage;
 

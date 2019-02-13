@@ -15,16 +15,23 @@ const route = (path) => {
 
 function* sagasLoadImage({image,uid,item}) {
     const { sourceURL } = image;
-    const path = route(item);
+    const { path } = image;
+    var pathImage = '';
+    if (sourceURL != undefined){
+        pathImage = sourceURL;
+    }else{
+        pathImage = path;
+    }
+    const pathFirebase = route(item);
 
     try {
         const storageRef = storage.ref().child("images/"+ item + "/" + uid);
-        yield storageRef.put(sourceURL).then(function(snapshot) {
+        yield storageRef.put(pathImage).then(function(snapshot) {
             const ref = snapshot.ref;
             var url = {};
             url[item] = ref;
             //update[`favorites.${someUid}`] = 'abc';
-            var docRef = dataBase.collection(path).doc(`${uid}`);
+            var docRef = dataBase.collection(pathFirebase).doc(`${uid}`);
             docRef.update(url);
         });
         yield put(ActionStopLoading());

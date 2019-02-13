@@ -2,6 +2,7 @@ import React from 'react'
 import { View, StyleSheet, ActivityIndicator, Modal } from 'react-native';
 
 export const Loading= () => {
+    console.log('llega al componente de loading');
     return (
         <Modal
             transparent={true}

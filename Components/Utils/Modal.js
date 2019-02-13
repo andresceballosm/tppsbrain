@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import { ActionCloseModal } from '../../Store/Actions/ActionApp';
 
 const ModalError= (props) => {
-    console.log('modal visible:', props.modal);
     return (
     <View style={{marginTop: 22}}>    
     <Modal
@@ -39,7 +38,6 @@ const mapStateToProps = state => {
   
 const mapDispatchToProps = dispatch => ({
     closeModal: () => {
-        console.log('dispatch closeModal');
         dispatch(ActionCloseModal());
     },
 });

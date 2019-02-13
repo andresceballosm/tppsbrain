@@ -6,10 +6,13 @@ import {connect} from 'react-redux';
 
 const AlertError= (props) => {
     const { error } = props;
+    console.log(props);
     const showAlert = () =>{
         var message = '';
         if(error == 'auth/email-already-in-use'){
             message = traslateText('errorEmailInUse');
+        }else{
+            message = error;
         }
         Alert.alert(
            message
@@ -33,7 +36,6 @@ const styles = StyleSheet.create ({
  });
 
 const mapStateToProps = state => {
-    console.log('error in alertErrorprops',state);
     return{
         error: state.ReducerAlertError.error.code,
     }   

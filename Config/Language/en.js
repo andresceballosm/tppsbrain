@@ -19,6 +19,7 @@ export default {
     mainAddress:'Main Address',
     phone: 'Phone No',
     website: 'Website',
+    email:'Email',
     password:'Password',
     confirmationpassword:'Confirm password',
     errorConfirmationPassword: 'Invalid password',

@@ -67,7 +67,6 @@ class PaymentsGeneric extends Component {
     }
     
     render() {
-        console.log('esto es proooops',this.props);
         const { navigation } = this.props
         return (
         <View>

@@ -1,28 +1,32 @@
 import React, { Component } from 'react'
-import { View, Text, Button, StyleSheet, ActivityIndicator, Modal } from 'react-native';
+import { View, Text, Button, StyleSheet, ActivityIndicator, Modal, Platform, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { dataBase, authentication, storage } from '../../../Store/Services/Firebase';
 import { ActionLoadImage,ActionCleanImage } from '../../../Store/Actions/ActionApp';
 import { ActionGetDataClub } from '../../../Store/Actions/ActionGetDataClub';
 import { ActionSetLoading } from '../../../Store/Actions/ActionApp';
 import { ActionGetUrlImage } from '../../../Store/Actions/ActionGetUrlImage';
+import { ActionLogout } from '../../../Store/Actions/ActionLogout';
 import CONSTANTS from '../../../Store/CONSTANTS';
 import AlertError from '../../Utils/AlertError';
 import { Loading } from '../../Utils/Loading';
 import SelectImageSaved from '../../Utils/SelectSavedImage';
+import ClubEditForm from './Forms/clubEditForm';
 
 export class ClubProfile extends Component {
     componentDidMount(){
-        console.log('componentDidMOunt',this.props);
        this.props.getData(this.props.clubUid);
-    }
+    };
+
     componentWillMount(){
         this.props.cleanImage();
-    }
+    };
+
+    editRegister = (values) => {
+        this.props.editClubProfile(values);
+    };
     render() {
-        console.log('his.props.urlImage',this.props.urlImage)
-        const { loading, alertError, urlImage } = this.props;
-        console.log('aquiuii',urlImage);
+        const { loading, alertError, urlImage, dataClub } = this.props;
         const LoadingStatus = () => {
             if (loading == 'true')
                return <Loading />      
@@ -36,30 +40,34 @@ export class ClubProfile extends Component {
         }
         
         const profile = () => {
-            if(urlImage != null){
-            console.log('entroooo', urlImage)   
-            return  (
-                <View>
-                    <Text> Profile Club </Text>
+            if(dataClub != null){
+                return  (
                     <View>
-                        { OpenAlertError() }
-                        { LoadingStatus() }
-                    </View>
-                    <SelectImageSaved 
-                        image={this.props.image}
-                        load={this.props.loadImage} 
-                        dataClub={this.props.dataClub} 
-                        urlImage={this.props.urlImage}
-                        uid={this.props.clubUid}
-                    />
-                    <Button
-                    title="Salir"
-                    onPress={() => {
-                        authentication.signOut();
-                    }}
-                    />
-                 </View> 
-            )         
+                        <Text> Profile </Text>
+                        <View>
+                            { OpenAlertError() }
+                            { LoadingStatus() }
+                        </View>
+                        <View style={styles.selectImage}>
+                            
+                        <SelectImageSaved 
+                            image={this.props.image}
+                            load={this.props.loadImage} 
+                            dataClub={this.props.dataClub} 
+                            urlImage={this.props.urlImage}
+                            uid={this.props.clubUid}
+                        />
+                        <ClubEditForm initialValues={this.props.initialValues} editClub={this.editRegister} />
+                        </View>
+                        <Button
+                        title="Salir"
+                        onPress={() => {
+                            this.props.logout()
+                            //authentication.signOut();
+                        }}
+                        />
+                    </View> 
+                )         
             }else{
                 return (
                     <View> 
@@ -71,9 +79,11 @@ export class ClubProfile extends Component {
                
         }
         return (
-            <View style={styles.container}>
-                {profile()}
-            </View>
+            <ScrollView contentContainerStyle={styles.contentContainer}>
+                <View style={styles.container}>
+                    {profile()}
+                </View>
+            </ScrollView>
         ) 
     }
     
@@ -81,9 +91,15 @@ export class ClubProfile extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center',
         flex: 1,
     },
+    contentContainer: {
+        paddingVertical: 20,
+        flex: Platform.OS === 'ios' ? 1 : 0,
+    },
+    selectImage:{
+        alignItems: 'center',
+    }
 });
 
 const mapStateToProps = state => {
@@ -92,6 +108,7 @@ const mapStateToProps = state => {
         image: state.ReducerImage.image,
         clubUid: state.ReducerSesion._user.uid,
         dataClub: state.ReducerDataClub,
+        initialValues: state.ReducerDataClub,
         urlImage: state.ReducerGetUrlImage,
         loading: state.app.loading,
         alertError: state.ReducerAlertError.alertError,
@@ -109,6 +126,16 @@ const mapDispatchToProps = dispatch => ({
     getData:(uid) => {
         dispatch(ActionSetLoading());
         dispatch(ActionGetDataClub(uid));
+    },
+    logout:()=>{
+        authentication.signOut().then((response) => {
+            console.log('salio')
+            dispatch(ActionLogout());
+        })
+    },
+    editClubProfile: (values) => {
+        dispatch(ActionSetLoading());
+        dispatch(ActionRegisterClub(values));
     },
 })
 

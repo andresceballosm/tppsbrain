@@ -5,6 +5,7 @@ export default ReducerSesion = (state=null, action) => {
         case CONSTANTS.SET_SESION:
             return action.usuario;
         case CONSTANTS.LOGOUT : 
+            console.log('reducer logout');
             return null;   
         default:
             return state;

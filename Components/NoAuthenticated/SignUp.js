@@ -30,9 +30,7 @@ class SignUp extends Component {
   component2 = () => <Text>{traslateText('selectClub')}</Text>
 
   render() {
-    //const { loading } = this.props;
     const { loading, alertError, navigation } = this.props;
-    console.log('alertErrorInSignUp: ',alertError)
     const buttons = [{ element:this.component1 }, { element: this.component2}]
     const { selectedIndex } = this.state
 
@@ -50,40 +48,39 @@ class SignUp extends Component {
     }
     
     return (
-      <ImageBackground source={require('../../Assets/images/background.png')} style={{width: '100%', height: '100%'}}>
+      <ImageBackground source={require('../../Assets/images/background.png')} style={{width: '100%', height: '100%'}}> 
       <ScrollView contentContainerStyle={styles.contentContainer}>
-      <View style={styles.containerSingUp}>
-        <View style={styles.header}>
-          <Text style={styles.question}>{traslateText('areyou')}</Text>
-          <ButtonGroup
-            onPress={this.updateIndex}
-            selectedIndex={selectedIndex}
-            buttons={buttons}
-            containerStyle={{height: 50}} 
-            selectedButtonStyle={{backgroundColor:'#76bc82'}}
-          />
+        <View style={styles.containerSingUp}>
+          <View style={styles.header}>
+            <Text style={styles.question}>{traslateText('areyou')}</Text>
+            <ButtonGroup
+              onPress={this.updateIndex}
+              selectedIndex={selectedIndex}
+              buttons={buttons}
+              containerStyle={{height: 50}} 
+              selectedButtonStyle={{backgroundColor:'#76bc82'}}
+            />
+          </View>
+          { OpenAlertError() }
+          { LoadingStatus()  }
+          <View style={styles.body}>
+            {this.state.selectedIndex == 1 ? <SignUpFormAdmin register={this.userRegister} /> : <Text>Player</Text>}
+            <Button 
+              title={traslateText('Btn_loginSingUp')}
+              type="clear"
+              onPress={() => {
+                  navigation.goBack()
+              }}
+            />
+          </View> 
         </View>
-        { OpenAlertError() }
-        { LoadingStatus()  }
-        <View style={styles.body}>
-          {this.state.selectedIndex == 1 ? <SignUpFormAdmin register={this.userRegister} /> : <Text>Player</Text>}
-          <Button 
-            title={traslateText('Btn_loginSingUp')}
-            type="clear"
-            onPress={() => {
-                navigation.goBack()
-            }}
-          />
-        </View> 
-      </View>
-      </ScrollView> 
+      </ScrollView>
       </ImageBackground>
     );
   }
 }
 
 const mapStateToProps = state => {
-  console.log('state signup:',state)
   return{
     loading: state.app.loading,
     alertError: state.ReducerAlertError.alertError,

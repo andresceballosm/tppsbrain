@@ -19,6 +19,7 @@ export default {
     mainAddress:'Dirección principal',
     phone: 'Teléfono',
     website: 'Página web',
+    email:'Correo electrónico',
     password:'Contraseña',
     confirmationpassword:'Confirmar contraseña',
     errorConfirmationPassword: 'Contraseña invalida',

@@ -45,7 +45,6 @@ const mapDispatchToProps = dispatch => ({
   authentication: () => {
     authentication.onAuthStateChanged((usuario) => {
       if (usuario) {
-        console.log(usuario._user.uid);
         dispatch(ActionSetSesion(usuario));
       } else {
         dispatch(ActionLogout());

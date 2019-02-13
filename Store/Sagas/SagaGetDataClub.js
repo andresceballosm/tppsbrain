@@ -16,19 +16,17 @@ function* sagasGetData( dataUid ) {
     try {
         const clubRef = dataBase.collection('clubs').doc(uid);
         const dataClub = yield call(getDataClub, clubRef);
-        console.log('yield clubdata',dataClub);
         yield put(ActionDataClub(dataClub));
         //Get url image in storage
         const ref = storage.ref(dataClub._data.LOGO_CLUB);
         const urlImage = yield call(getDownloadURL, ref);
-        console.log('urlImagee',urlImage);
         yield put(ActionGetUrlImage(urlImage))
         yield put(ActionStopLoading());
 
     } catch (error) {
         console.log(error);
         yield put(ActionStopLoading());
-        yield put(ActionOpenAlertError(error));
+        //yield put(ActionOpenAlertError(error));
     }
 }
 export const sagaGetDataClub = [

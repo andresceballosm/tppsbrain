@@ -2,14 +2,15 @@ import React from 'react';
 import { View, Text, StyleSheet, TextInput,  } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Field, reduxForm } from 'redux-form';
-import { traslateText } from '../../../Config/Language/Utils';
+import { traslateText } from '../../../../Config/Language/Utils';
 
 const fieldName = (props) => {
   return (
-    <View style={styles.texInput}>
+    <View style={styles.field}>
       <TextInput
         placeholder={props.ph}
         onChangeText={props.input.onChange}
+        textContentType={props.ContentType}
         value={props.input.value}
         keyboardType={props.input.name === 'email' ? 'email-address' : 'default'}
         autoCapitalize="none"
@@ -65,21 +66,45 @@ const validate = (values) => {
   return errors;
 };
 
-const SignUpFormAdmin = (props) => {
+const ClubEditForm = (props) => {
   return (
     <View>
-      <Field name="clubname" component={fieldName} ph={traslateText('clubname')} />
-      <Field name="administrator" component={fieldName} ph={traslateText('administrator')} />
-      <Field name="mainAddress" component={fieldName} ph={traslateText('mainAddress')} />
-      <Field name="phone" component={fieldName} ph={traslateText('phone')} />
-      <Field name="website" component={fieldName} ph={traslateText('website')} />
-      <Field name="email" component={fieldName} ph="email@email.com" />
-      <Field name="password" component={fieldName} ph={traslateText('password')} />
-      <Field name="confirmation" component={fieldName} ph={traslateText('confirmationpassword')} />
+        <View style={styles.texInput}>
+            <Text style={styles.inputName}>{traslateText('clubname')}</Text>  
+            <Field name="clubname" component={fieldName} ContentType='none' />
+        </View>
+        <View style={styles.texInput}>
+            <Text style={styles.inputName}>{traslateText('administrator')}</Text>  
+            <Field name="administrator" component={fieldName} ContentType='none' />
+        </View>  
+        <View style={styles.texInput}>
+            <Text style={styles.inputName}>{traslateText('mainAddress')}</Text>  
+            <Field name="mainAddress" component={fieldName} ContentType='addressCity' />
+        </View>  
+        <View style={styles.texInput}>
+            <Text style={styles.inputName}>{traslateText('phone')}</Text>  
+            <Field name="phone" component={fieldName}  ContentType='telephoneNumber' />
+        </View>  
+        <View style={styles.texInput}>
+            <Text style={styles.inputName}>{traslateText('website')}</Text>  
+            <Field name="website" component={fieldName} ContentType='none' />
+        </View>  
+        <View style={styles.texInput}>
+            <Text style={styles.inputName}>{traslateText('email')}</Text>  
+            <Field name="email" component={fieldName} ContentType='none' />
+        </View>  
+        <View style={styles.texInput}>
+            <Text style={styles.inputName}>{traslateText('password')}</Text>  
+            <Field name="password" component={fieldName}  ContentType='none' />
+        </View>  
+        <View style={styles.texInput}>
+            <Text style={styles.inputName}>{traslateText('confirmationpassword')}</Text>  
+            <Field name="confirmation" component={fieldName} ContentType='none' />
+        </View>        
       <Button
         title={traslateText('Btn_register')}
         type="clear"
-        onPress={props.handleSubmit(props.register)}
+        onPress={props.handleSubmit(props.editClub)}
       />
     </View>
   );
@@ -87,10 +112,18 @@ const SignUpFormAdmin = (props) => {
 
 const styles = StyleSheet.create({
   texInput: {
-    marginBottom: 16,
+    marginBottom: 10,
+    flex: 1, 
+    flexDirection: 'row',
+    paddingHorizontal: 20
+  },
+  inputName:{
+    flex: 1
+  },
+  field:{
+    flex: 2
   },
   linea: {
-    //backgroundColor: '#DCDCDC',
     height: 2,
   },
   errors: {
@@ -99,6 +132,6 @@ const styles = StyleSheet.create({
 });
 
 export default reduxForm({
-  form: 'SignUpFormAdmin',
+  form: 'ClubEditForm',
   validate,
-})(SignUpFormAdmin);
+})(ClubEditForm);

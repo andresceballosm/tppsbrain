@@ -13,7 +13,6 @@ export const getClientToken = () => {
     });
 };
 export const postPurchase = (nonce, amount, options={}) => {
-  console.log("in postPurchase nonce", nonce);
   return fetch(URL + "/pay", {
     method: "POST",
     headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
@@ -23,7 +22,6 @@ export const postPurchase = (nonce, amount, options={}) => {
     })
   }).then(res => {
     let json = res;
-    console.log('llega del pago',json);
     return json;
   });
 };
