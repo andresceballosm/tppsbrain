@@ -23,6 +23,18 @@ export default {
     password:'Contraseña',
     confirmationpassword:'Confirmar contraseña',
     errorConfirmationPassword: 'Contraseña invalida',
-    errorEmailInUse:'La dirección de correo electrónico que ingresó ya está registrada.'
+    errorEmailInUse:'La dirección de correo electrónico que ingresó ya está registrada.',
+
+    //Club Profile
+    locations:'Ubicaciones',
+    calendarHeadlines:'Calendario Titulares',
+    calendarLink:'Link del calendario',
+    club_org_progile:'Club /Org Profile',
+    court_detail:'Detalle de cancha',
+    manage_sponsors:'Gestionar Patrocinadores',
+    my_staff:'Mi Equipo',
+    gallery: 'Galeria',
+    services:'Servicios',
+    facilities:'Instalaciones',
 
 }

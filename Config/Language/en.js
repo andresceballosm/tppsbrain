@@ -24,4 +24,16 @@ export default {
     confirmationpassword:'Confirm password',
     errorConfirmationPassword: 'Invalid password',
     errorEmailInUse: 'The email address is already in use by another account.',
+
+    //Club Profile 
+    locations:'Locations',
+    calendarHeadlines:'Calendar Headlines',
+    calendarLink:'Calendar Link',
+    club_org_progile:'Club /Org Profile',
+    court_detail:'Court Detail',
+    manage_sponsors:'Manage Sponsors',
+    my_staff:'My Staff',
+    gallery: 'Gallery',
+    services:'Services',
+    facilities:'Facilities',
 }

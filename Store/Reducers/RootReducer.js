@@ -8,8 +8,11 @@ import ReducerImage from './Utils/ReducerImage';
 import ReducerTypeUser from './ReducerTypeUser';
 import ReducerDataClub from './ReducerDataClub';
 import ReducerGetUrlImage from './ReducerGetUrlImage';
+import ReducerDataFacilities from './ReducerDataFacilities';
+import ReducerDataLocation from './ReducerDataLocation'
+import ReducerDataServices from './ReducerDataServices'
+import ReducerDataStaff from './ReducerDataStaff'
 import { reducer as form } from 'redux-form';
-
 
 export default(reducers = combineReducers({
     ReducerSesion,
@@ -21,5 +24,9 @@ export default(reducers = combineReducers({
     ReducerTypeUser,
     ReducerDataClub,
     ReducerGetUrlImage,
+    ReducerDataLocation,
+    ReducerDataFacilities,
+    ReducerDataServices,
+    ReducerDataStaff,
     form
 }));

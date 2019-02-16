@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, Image, View, 
-          SafeAreaView, ScrollView, ImageBackground } from 'react-native';
+          SafeAreaView, ScrollView, ImageBackground,TouchableOpacity } from 'react-native';
 import { DrawerItems } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -21,7 +21,9 @@ export const CustomDraweComponent = (props) => (
           </View>
           <View style={styles.headerImage}>
             <Image style={styles.banner} source={require('../Assets/icons/tennisAppSuiteBanner.png')}/>
-            <Image style={styles.image} source={require('../Assets/icons/club-org-seal.png')}/>
+            <TouchableOpacity onPress={() => { props.navigation.navigate('About')}}>
+              <Image style={styles.image} source={require('../Assets/icons/club-org-seal.png')}/>
+            </TouchableOpacity>
           </View>    
       <ScrollView>
         <DrawerItems {...props} />

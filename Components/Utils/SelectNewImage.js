@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Image, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import  ImagePicker from 'react-native-image-crop-picker' ;
 import { Button } from 'react-native-elements';
+import { LoadingSmall } from '../Utils/LoadingSmall';
 
 const SelectNewImage = (props) => {
-  console.log('propsSelectNewImage', props);
   const platformImage = () => {
     var imagePath = '';
     if(Platform.OS === 'ios'){
@@ -39,11 +39,11 @@ const SelectNewImage = (props) => {
     <View>
       <TouchableOpacity onPress={() => { selectImage()}}>
         { props.image ? (
-            <Image source={{ uri: platformImage() }} 
+            <Image loadingIndicatorSource={() => <LoadingSmall />} source={{ uri: platformImage() }} 
             style={styles.image} 
           />
         ):(
-            <Image source={{ uri: props.urlImage }} 
+        <Image loadingIndicatorSource={() => <LoadingSmall />} source={{ uri: props.urlImage }} 
             style={styles.image} 
             />
         )}
@@ -54,7 +54,7 @@ const SelectNewImage = (props) => {
 
 const styles = StyleSheet.create({
   image: {
-      width: 250, height: 250,
+      width: 200, height: 200,
   }
 });
 export default SelectNewImage;

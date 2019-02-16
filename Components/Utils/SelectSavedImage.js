@@ -3,6 +3,7 @@ import { View, Image, TouchableOpacity, StyleSheet,Platform } from 'react-native
 import  ImagePicker  from  'react-native-image-crop-picker' ;
 import { Button } from 'react-native-elements';
 import SelectNewImage from './SelectNewImage';
+import { LoadingSmall } from '../Utils/LoadingSmall';
 
 const SelectImageSaved = (props) => {
     const platformImage = () => {
@@ -40,7 +41,7 @@ const SelectImageSaved = (props) => {
         ):(
             <TouchableOpacity onPress={() => { selectImage()}}>
             { props.image ? (
-                <Image source={{ uri: platformImage() }} 
+                <Image loadingIndicatorSource={() => <LoadingSmall />} source={{ uri: platformImage() }} 
                 style={styles.image} 
              />
              ):(
@@ -56,7 +57,7 @@ const SelectImageSaved = (props) => {
 
 const styles = StyleSheet.create({
   image: {
-      width: 250, height: 250,
+      width: 200, height: 200,
   }
 });
 export default SelectImageSaved;
