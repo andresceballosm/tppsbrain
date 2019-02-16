@@ -6,7 +6,6 @@ import {connect} from 'react-redux';
 
 const AlertError= (props) => {
     const { error } = props;
-    console.log(props);
     const showAlert = () =>{
         var message = '';
         if(error == 'auth/email-already-in-use'){
@@ -43,7 +42,6 @@ const mapStateToProps = state => {
   
 const mapDispatchToProps = dispatch => ({
     closeModal: () => {
-        console.log('dispatch closeModal');
         dispatch(ActionOpenAlertError());
     },
 });

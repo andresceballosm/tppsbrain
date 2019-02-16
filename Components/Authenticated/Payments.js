@@ -3,7 +3,6 @@ import BraintreeDropIn from 'react-native-braintree-payments-drop-in';
 import { View, Button} from 'react-native';
 
 braintreePayment = (token) => {
-  console.log('esto es token',token);
   BraintreeDropIn.show({
       clientToken: token,
     })
@@ -22,7 +21,6 @@ class Payment extends Component {
     render() {
     const { navigation } = this.props;
     const token = navigation.getParam('token');
-    console.log('esto es token',token)
     
     return (
       <View>

@@ -22,7 +22,6 @@ export const ActionOpenAlertError = error => ({
 });
 
 export const ActionLoadImage = (image, uid, item) => {
-    console.log('uid en actionloadimage',uid);
     return {
         type: CONSTANTS.LOAD_IMAGE_LOGOCLUB,
         'image':image,

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { View, Text, Button, StyleSheet, ScrollView, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { dataBase, authentication, storage } from '../../../../Store/Services/Firebase';
+import { dataBase, authentication } from '../../../../Store/Services/Firebase';
 import { ActionLoadImage,ActionCleanImage } from '../../../../Store/Actions/ActionApp';
 import { ActionGetDataClub } from '../../../../Store/Actions/ActionGetDataClub';
-import { ActionSetLoading } from '../../../../Store/Actions/ActionApp';
+import { ActionSetLoading, ActionStopLoading } from '../../../../Store/Actions/ActionApp';
+import { ActionSetSettingClub } from '../../../../Store/Actions/ActionSetSettingClub';
 import { ActionGetUrlImage } from '../../../../Store/Actions/ActionGetUrlImage';
 import { ActionLogout } from '../../../../Store/Actions/ActionLogout';
 import { ActionLoadLocation } from '../../../../Store/Actions/ActionLoadLocation';
@@ -13,13 +14,10 @@ import AlertError from '../../../Utils/AlertError';
 import { Loading } from '../../../Utils/Loading';
 import SelectImageSaved from '../../../Utils/SelectSavedImage';
 import ClubEditForm from './Forms/clubEditForm';
+import ColorPalette from 'react-native-color-palette'
+import { database } from 'firebase';
 
 export class ClubProfile extends Component {
-    
-    componentDidMount(){
-       this.props.getData(this.props.clubUid);
-    };
-    
     render() {
         const { loading, alertError, initialValues } = this.props;
         const LoadingStatus = () => {
@@ -34,6 +32,26 @@ export class ClubProfile extends Component {
         return null;
         }
 
+        const InstitutionalColor = () => {
+            const id = this.props.clubUid;
+            return <ColorPalette
+              onChange={color => this.props.loadSettings(id,'institutionalcolor',color)}
+              defaultColor={'#C0392B'}
+              colors={['#C0392B', '#E74C3C', '#f7d202', '#312959', '#23ed4f']}
+              title={"Select institutional color"}
+            />
+        }
+
+        const backgroundColor = () => {
+            const id = this.props.clubUid
+            return <ColorPalette
+              onChange={color => this.props.loadSettings(id,'backgroundcolor',color)}
+              defaultColor={'#C0392B'}
+              colors={['#ffffff', '#b6ceb5', '#dbd3e8', '#e2e0de', '#fafc71']}
+              title={"Select background color"}
+            />
+        }
+          
         const profile = () => {     
             if(initialValues.load !== null){
                 return  (
@@ -53,6 +71,8 @@ export class ClubProfile extends Component {
                                 urlImage={this.props.urlImage}
                                 uid={this.props.clubUid}
                             />
+                           {InstitutionalColor()}
+                           {backgroundColor()}
                         </View>
                         <ClubEditForm />
                         <Button
@@ -105,7 +125,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-    console.log('stateee',state)
     return {
         image: state.ReducerImage.image,
         clubUid: state.ReducerSesion._user.uid,
@@ -142,13 +161,25 @@ const mapDispatchToProps = dispatch => ({
     cleanImage:() => {
         dispatch(ActionCleanImage())
     },
+    loadSettings:(id,param,color) => {
+        dispatch(ActionSetLoading());
+        var data = {};
+        data[param] = color;
+        dataBase.collection('settings_club').doc(`${id}`).update(data).then((response) => {
+            dispatch(ActionSetSettingClub({param,color}));
+            dispatch(ActionStopLoading());
+        }).catch((error) => {
+            console.log(error);
+            dispatch(ActionStopLoading());
+        })
+        
+    },
     getData:(uid) => {
         //dispatch(ActionSetLoading());
         dispatch(ActionGetDataClub(uid));
     },
     logout:()=>{
         authentication.signOut().then((response) => {
-            console.log('salio',response)
             dispatch(ActionLogout());
         })
     },

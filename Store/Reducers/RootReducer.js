@@ -9,9 +9,10 @@ import ReducerTypeUser from './ReducerTypeUser';
 import ReducerDataClub from './ReducerDataClub';
 import ReducerGetUrlImage from './ReducerGetUrlImage';
 import ReducerDataFacilities from './ReducerDataFacilities';
-import ReducerDataLocation from './ReducerDataLocation'
-import ReducerDataServices from './ReducerDataServices'
-import ReducerDataStaff from './ReducerDataStaff'
+import ReducerDataLocation from './ReducerDataLocation';
+import ReducerDataServices from './ReducerDataServices';
+import ReducerDataStaff from './ReducerDataStaff';
+import ReducerSettingClub from './ReducerSettingClub';
 import { reducer as form } from 'redux-form';
 
 export default(reducers = combineReducers({
@@ -28,5 +29,6 @@ export default(reducers = combineReducers({
     ReducerDataFacilities,
     ReducerDataServices,
     ReducerDataStaff,
+    ReducerSettingClub,
     form
 }));

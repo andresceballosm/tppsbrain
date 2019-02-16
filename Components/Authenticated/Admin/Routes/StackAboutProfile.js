@@ -7,23 +7,7 @@ import AboutProfile from '../ClubProfile/AboutProfile';
 
 const StackAboutProfile = StackNavigator({
     AboutProfile: {
-        screen: AboutProfile,
-        navigationOptions: ({ navigation }) => {
-            return {
-                headerTitle: 'ABOUT PROFILE',
-                headerStyle: {
-                    backgroundColor: '#312959',
-                },
-                headerTintColor: '#dfe202',
-                headerLeft: (
-                    <Icon name="ios-menu" 
-                    size={30} 
-                    color="#dfe202"
-                    style={[styles.menu]}
-                    onPress={() => {navigation.navigate('DrawerOpen')}} />
-                ),
-            }
-        },  
+        screen: AboutProfile,  
     },
 });
 
@@ -38,4 +22,3 @@ const styles = StyleSheet.create({
 });
 
 export { StackAboutProfile };
-

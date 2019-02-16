@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import Store from './Store/Store';
 import Selection from './Components/Selection';
 
-YellowBox.ignoreWarnings(['Require cycle:']);
 export default class App extends Component {
   render() {
     return (

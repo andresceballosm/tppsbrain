@@ -4,7 +4,8 @@ import { StyleSheet, Text, Image, View,
 import { DrawerItems } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export const CustomDraweComponent = (props) => (
+export const CustomDraweComponent = (props) => {
+  return (
   <ImageBackground source={require('../Assets/images/slide.png')} 
     style={{width: '100%', height:'100%'}}
   >
@@ -32,6 +33,7 @@ export const CustomDraweComponent = (props) => (
     </SafeAreaView>   
   </ImageBackground>     
 )
+}
 
 const styles = StyleSheet.create({
     safeArea: {

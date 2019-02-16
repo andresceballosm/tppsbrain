@@ -9,16 +9,14 @@ import { StackAboutProfile } from './StackAboutProfile';
 const AdminRoutes = DrawerNavigator({
     'About': {
       screen: StackAboutProfile,
-
     },
     'Club/ORG Profile': {
       screen: StackClubProfile,
-
     },
     'Players': {
       screen: StackPlayers,
     },
-    Payments: {
+    'Payments': {
       screen: Payments,
     },
   },{

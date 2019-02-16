@@ -71,14 +71,11 @@ const fieldName = (props) => {
 
 class ClubEditForm extends Component {
   editRegister = () => {
-    console.log(this.props);
     const values = this.props.formEdit.ClubEditForm.values;
-    console.log('llegooo', values )
     this.props.editClubProfile(values);
   };
   
   render(){   
-  console.log(this.props.initialValues) 
   const {initialValues} = this.props.initialValues
   //this.props.initialize(this.props.initialValues.data);
   return (
@@ -156,7 +153,6 @@ const styles = StyleSheet.create({
   },
 });
 const mapStateToProps = (state) => {
-  console.log('stateClubEditForm', state);
   return {
       clubUid: state.ReducerSesion._user.uid,
       formEdit: state.form,
@@ -175,7 +171,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => ({
   editClubProfile: (values) => {
-    console.log('llegooo2', values);
       //dispatch(ActionSetLoading());
       //dispatch(ActionRegisterClub(values));
   },

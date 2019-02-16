@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, Button, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Button, StyleSheet, ScrollView} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 import { authentication } from '../../../../Store/Services/Firebase';
 import { ActionLoadImage,ActionCleanImage } from '../../../../Store/Actions/ActionApp';
@@ -16,14 +17,35 @@ import  AboutClubForm  from './Forms/AboutClubForm';
 import { traslateText } from '../../../../Config/Language/Utils';
  
 export class AboutProfile extends Component {
+    static navigationOptions = ({ navigation }) => {
+        console.log(navigation)
+        const backgroundcolor = navigation.getParam('institutionalcolor')
+        return {
+            headerTitle: 'ABOUT PROFILE',
+            headerStyle: {
+                backgroundColor: backgroundcolor ? backgroundcolor : '#ffffff',
+            },
+            headerTintColor: '#dfe202',
+            headerLeft: (
+                <Icon name="ios-menu" 
+                size={30} 
+                color="#dfe202"
+                style={[styles.menu]}
+                onPress={() => {navigation.navigate('DrawerOpen')}} />
+            ),
+        }
+    }
     
-    componentDidMount(){
-        console.log('componentDidMount')
-       this.props.getData(this.props.clubUid);
-    };
+    componentWillReceiveProps(nextProps) {
+        console.log('nextProps',nextProps)
+        if (nextProps.settings !== this.props.settings) {
+           this.props.navigation.setParams(nextProps.settings);
+        }
+    }
 
     render() {
-        const { loading, alertError, initialValues } = this.props;
+        const { loading, alertError, initialValues, settings } = this.props;
+
         const LoadingStatus = () => {
             if (loading == 'true')
                return <Loading />      
@@ -38,7 +60,6 @@ export class AboutProfile extends Component {
 
         const profile = () => {     
             if(initialValues.load !== null){
-                console.log('entraaa');
                 return  (
                     <View>
                         <View>
@@ -125,7 +146,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-    console.log('stateee',state)
+    console.log(state);
     return {
         image: state.ReducerImage.image,
         clubUid: state.ReducerSesion._user.uid,
@@ -139,6 +160,7 @@ const mapStateToProps = state => {
         loading: state.app.loading,
         alertError: state.ReducerAlertError.alertError,
         dataLocation:state.ReducerDataLocation,
+        settings: state.ReducerSettingClub,
     }
 }
 
@@ -172,7 +194,6 @@ const mapDispatchToProps = dispatch => ({
     },
     logout:()=>{
         authentication.signOut().then((response) => {
-            console.log('salio',response)
             dispatch(ActionLogout());
         })
     },

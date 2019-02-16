@@ -5,9 +5,13 @@ import { ActionStopLoading, ActionOpenAlertError } from '../Actions/ActionApp';
 import { ActionDataClub, ActionDataLocation, ActionDataFacilities, ActionDataServices , ActionDataStaff } from '../Actions/ActionDataClub';
 import { ActionGetUrlImage } from '../Actions/ActionGetUrlImage';
 import { ActionLoadClubProfileComplete } from '../Actions/ActionLoadClubProfileComplete'
+import { ActionGetSettingClub } from '../Actions/ActionSetSettingClub';
 
 const getDataClub = clubRef => 
-    clubRef.get().then(dataClub => dataClub)  
+    clubRef.get().then(dataClub => dataClub);
+
+const getSettingClub = settingRef => 
+    settingRef.get().then(settingClub => settingClub)     
 
 const getDataFacilities = facilitiesRef => 
     facilitiesRef.get().then(dataClub => dataClub)    
@@ -27,6 +31,9 @@ const getDownloadURL = ref =>
 function* sagasGetData( dataUid ) {
     const {uid} = dataUid;
     try {
+        const settingRef = dataBase.collection('settings_club').doc(uid);
+        const settingClub = yield call(getSettingClub, settingRef)
+        yield put(ActionGetSettingClub(settingClub));
         const clubRef = dataBase.collection('clubs').doc(uid);
         const dataClub = yield call(getDataClub, clubRef);
         yield put(ActionDataClub(dataClub));
@@ -89,11 +96,9 @@ function* sagasLoadServices( uid ) {
 };
 
 function* sagasLoadStaff( uid ) {
-    console.log('uid en staff', uid)
     try {
         const staffRef = dataBase.collection('Staff').where("club_ID", "==", uid);
         const dataStaff = yield call(getDataStaff, staffRef);
-        console.log('dataStaff',dataStaff);
         yield put(ActionDataStaff(dataStaff._docs));
     } catch (error) {
         console.log(error);

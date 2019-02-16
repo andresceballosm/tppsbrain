@@ -8,7 +8,6 @@ import NormalizePhone from '../../../../Utils/NormalizePhone';
 
 const AboutClubForm = (props) => {
     const { initialValues } = props;
-    console.log(initialValues);
     return (
         <View>
             <View style={styles.scrolContainer}>

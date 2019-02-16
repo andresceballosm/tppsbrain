@@ -26,7 +26,6 @@ class PaymentsGeneric extends Component {
             customerID: '123456'
         })
         .then(response => {
-            console.log('este es el repsonde',response.status);
             if (response.type === "default") {
                 let clientToken = response._bodyInit;
                 this.setState({clientToken});

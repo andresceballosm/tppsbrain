@@ -5,7 +5,6 @@ import { ListItem } from 'react-native-elements';
 
 export default class ClubProfileMenu extends Component {
   render() {
-    console.log(this.props);
     const {navigation} = this.props
     return (
         <View style={styles.container}> 
